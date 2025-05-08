@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.postimg.cc/Cxqbn9NF/Screenshot-20250508-091252.png');
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .faq-answer {
+            font-size: 16px;
+            display: none;
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #ccc;
+        }
+        .faq-question:hover {
+            color: #28a745;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">What is our server's main purpose?</div>
+            <div class="faq-answer">Our server is dedicated to providing an immersive gaming experience with constant updates and strong anti-hacking measures.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How do I report a player?</div>
+            <div class="faq-answer">You can report a player through our 'Drop a Report' page. Simply provide their in-game name and description of the incident.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How can I contact the server administrators?</div>
+            <div class="faq-answer">You can reach out to us via the 'Contact Us' page for any suggestions, feedback, or concerns regarding the server.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How do I join the server?</div>
+            <div class="faq-answer">You can join the server by using the IP address provided on the 'Server Info' page. Ensure you have the required game version.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What should I do if I encounter a bug or glitch in the game?</div>
+            <div class="faq-answer">If you encounter a bug or glitch, please report it immediately through our 'Drop a Report' page with as much detail as possible.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What happens if I get banned from the server?</div>
+            <div class="faq-answer">If you get banned, you will receive a notification explaining the reason for the ban. To appeal, contact the server admins via the 'Contact Us' page.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Can I play with friends on the server?</div>
+            <div class="faq-answer">Yes, our server supports multiplayer gameplay. Invite your friends to join and experience the game together!</div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle FAQ answers when the question is clicked
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
