@@ -1,18 +1,19 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Drop a Report</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XSE3S267R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8XSE3S267R');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XSE3S267R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8XSE3S267R');
+  </script>
   <style>
     body {
       margin: 0;
@@ -81,6 +82,18 @@
       font-size: 14px;
       color: #ccc;
     }
+
+    .preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .preview img, .preview video {
+      max-width: 100px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -102,17 +115,47 @@
 
     <textarea id="description" rows="4" placeholder="Describe the issue" required></textarea>
 
+    <input type="file" id="media" accept="image/*,video/*" multiple>
+    <div class="preview" id="preview"></div>
+
     <button onclick="submitReport()">Submit</button>
   </div>
 
   <div class="footer">© 2025 All Rights Reserved</div>
 
   <script>
+    const previewDiv = document.getElementById("preview");
+
+    document.getElementById("media").addEventListener("change", function () {
+      previewDiv.innerHTML = "";
+      const files = this.files;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const src = e.target.result;
+          let element;
+          if (file.type.startsWith("video")) {
+            element = document.createElement("video");
+            element.controls = true;
+          } else {
+            element = document.createElement("img");
+          }
+          element.src = src;
+          previewDiv.appendChild(element);
+        };
+
+        reader.readAsDataURL(file);
+      });
+    });
+
     function submitReport() {
       const name = document.getElementById('name').value;
       const number = document.getElementById('number').value;
       const type = document.getElementById('type').value;
       const description = document.getElementById('description').value;
+      const mediaFiles = document.getElementById('media').files;
 
       if (!name || !number || !type || !description) {
         alert("Please fill in all fields");
@@ -122,9 +165,9 @@
       const message = `🛑 New Report 🛑\n\n*In-Game Name:* ${name}\n*WhatsApp:* ${number}\n*Report Type:* ${type}\n*Description:* ${description}`;
       const botToken = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
       const groupId = "-1002587957935";
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-      fetch(url, {
+      // Send the text message first
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -132,16 +175,39 @@
           text: message,
           parse_mode: "Markdown"
         })
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert("Report submitted successfully!");
+      }).then(() => {
+        // Then send media files one by one
+        if (mediaFiles.length > 0) {
+          Array.from(mediaFiles).forEach(file => {
+            const formData = new FormData();
+            const isVideo = file.type.startsWith("video");
+            formData.append(isVideo ? "video" : "photo", file);
+            formData.append("chat_id", groupId);
+
+            const mediaUrl = `https://api.telegram.org/bot${botToken}/${isVideo ? "sendVideo" : "sendPhoto"}`;
+
+            fetch(mediaUrl, {
+              method: "POST",
+              body: formData
+            }).catch(err => {
+              console.error(err);
+              alert("Some media files failed to upload.");
+            });
+          });
+
+          alert("Report submitted with media!");
+        } else {
+          alert("Report submitted!");
+        }
+
+        // Clear form
         document.getElementById("name").value = "";
         document.getElementById("number").value = "";
         document.getElementById("type").value = "";
         document.getElementById("description").value = "";
-      })
-      .catch(error => {
+        document.getElementById("media").value = "";
+        previewDiv.innerHTML = "";
+      }).catch(error => {
         alert("Failed to submit report.");
         console.error(error);
       });
