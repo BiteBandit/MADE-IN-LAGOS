@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Made in Lagos RP - Registration</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: -1;
+      animation: moveStars 100s linear infinite;
+    }
+
+    @keyframes moveStars {
+      0% { background-position: 0 0; }
+      100% { background-position: -10000px 5000px; }
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      margin-top: 50px;
+    }
+
+    .container img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    p.sub {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #00aaff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #008ecc;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="container">
+    <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Made in Lagos Logo">
+    <h1>Welcome to Made in Lagos</h1>
+    <p class="sub">The biggest sound server in Nigeria and one of the best in Africa</p>
+
+    <form id="registerForm">
+      <label for="realName">Real Name</label>
+      <input type="text" id="realName" required>
+
+      <label for="inGameName">In-Game Name</label>
+      <input type="text" id="inGameName" required>
+
+      <label for="memberStatus">Are you a new or existing member?</label>
+      <select id="memberStatus" required>
+        <option value="">Select</option>
+        <option value="New Member">New Member</option>
+        <option value="Existing Member">Existing Member</option>
+      </select>
+
+      <label for="invitedBy">Who invited you?</label>
+      <input type="text" id="invitedBy" placeholder="Optional">
+
+      <label for="faction">Choose your Faction</label>
+      <select id="faction" required>
+        <option value="">Select Faction</option>
+        <option value="Nigeria Police">Nigeria Police</option>
+        <option value="Mil Medic">Mil Medic</option>
+        <option value="EFCC">EFCC</option>
+        <option value="Mil BBC">Mil BBC</option>
+        <option value="Mafia">Mafia</option>
+        <option value="Government">Government</option>
+        <option value="CIA">CIA</option>
+        <option value="Car Dealer">Car Dealer</option>
+        <option value="Angel's Bugger">Angel's Bugger</option>
+        <option value="Taxi Services">Taxi Services</option>
+        <option value="Chosen Ministry">Chosen Ministry</option>
+        <option value="Food Plaza">Food Plaza</option>
+        <option value="Furniture">Furniture</option>
+      </select>
+
+      <label for="whatsapp">WhatsApp Number</label>
+      <input type="text" id="whatsapp" placeholder="Optional">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const botToken = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
+    const chatId = "-4751677103";
+
+    if (localStorage.getItem("registered") === "true") {
+      window.location.href = "homepage.html";
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const realName = document.getElementById("realName").value;
+      const inGameName = document.getElementById("inGameName").value;
+      const faction = document.getElementById("faction").value;
+      const status = document.getElementById("memberStatus").value;
+      const invitedBy = document.getElementById("invitedBy").value || "Not provided";
+      const whatsapp = document.getElementById("whatsapp").value || "Not provided";
+
+      const message = `New Registration:\n\nReal Name: ${realName}\nIn-Game Name: ${inGameName}\nStatus: ${status}\nInvited By: ${invitedBy}\nFaction: ${faction}\nWhatsApp: ${whatsapp}`;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      }).then(() => {
+        localStorage.setItem("registered", "true");
+        window.location.href = "homepage.html";
+      }).catch(error => {
+        alert("Failed to send data. Try again.");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
