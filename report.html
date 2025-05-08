@@ -1,128 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Report Page</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png');
+      color: white;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png');
       background-size: cover;
       background-position: center;
-      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      background-color: rgba(0,0,0,0.7);
-      padding: 20px;
+
+    .logo {
+      width: 80px;
+      height: auto;
+      margin: 20px;
       border-radius: 10px;
     }
-    h2 {
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
       text-align: center;
     }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input, select, textarea, button {
-      width: 100%;
+
+    input, select, button {
+      width: 90%;
       padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
+      margin: 10px 0;
       border: none;
-      font-size: 16px;
+      border-radius: 8px;
     }
+
     button {
-      background-color: #0066ff;
+      background-color: #007BFF;
       color: white;
       cursor: pointer;
-      margin-top: 20px;
     }
+
     button:hover {
-      background-color: #004db3;
+      background-color: #0056b3;
     }
-    .footer {
-      text-align: center;
+
+    footer {
       margin-top: 30px;
-      font-size: 14px;
+      padding: 10px;
+      text-align: center;
       color: #ccc;
     }
   </style>
 </head>
 <body>
+
+  <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo" class="logo">
+
   <div class="container">
-    <h2>Submit a Report</h2>
-    <label for="ign">In-Game Name</label>
-    <input type="text" id="ign" placeholder="Your In-Game Name" />
-
-    <label for="whatsapp">WhatsApp Number</label>
-    <input type="text" id="whatsapp" placeholder="Your WhatsApp Number" />
-
-    <label for="type">Report Type</label>
-    <select id="type">
-      <option value="Hacking">Hacking</option>
-      <option value="Player FRP">Player FRP</option>
-      <option value="Bug">Bug</option>
-    </select>
-
-    <label for="details">Report Details</label>
-    <textarea id="details" placeholder="Enter report details..." rows="5"></textarea>
-
-    <button onclick="sendReport()">Submit Report</button>
+    <h2>Report a Player</h2>
+    <form id="reportForm">
+      <input type="text" id="ign" placeholder="In-Game Name" required>
+      <input type="text" id="whatsapp" placeholder="WhatsApp Number" required>
+      <select id="reportType" required>
+        <option value="">Select Report Type</option>
+        <option value="Hacking">Hacking</option>
+        <option value="Player FRP">Player FRP</option>
+        <option value="Bug">Bug</option>
+      </select>
+      <button type="submit">Submit Report</button>
+    </form>
   </div>
 
-  <div class="footer">
+  <footer>
     &copy; 2025 All Rights Reserved
-  </div>
+  </footer>
 
   <script>
-    async function sendReport() {
-      const ign = document.getElementById("ign").value.trim();
-      const whatsapp = document.getElementById("whatsapp").value.trim();
-      const type = document.getElementById("type").value;
-      const details = document.getElementById("details").value.trim();
+    const token = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
+    const groupId = "-1002587957935";
 
-      if (!ign || !whatsapp || !details) {
-        alert("Please fill out all fields.");
-        return;
-      }
+    document.getElementById('reportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-      const message = `New Report Received:\n\nIGN: ${ign}\nWhatsApp: ${whatsapp}\nType: ${type}\nDetails: ${details}`;
-      const botToken = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
-      const chatId = "-1002587957935";
+      const ign = document.getElementById('ign').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const reportType = document.getElementById('reportType').value;
 
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      const data = {
-        chat_id: chatId,
-        text: message
-      };
+      const message = `New Report:\n\nIGN: ${ign}\nWhatsApp: ${whatsapp}\nReport Type: ${reportType}`;
 
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: groupId,
+          text: message
+        })
+      }).then(response => {
         if (response.ok) {
-          alert("Report sent successfully!");
-          document.getElementById("ign").value = "";
-          document.getElementById("whatsapp").value = "";
-          document.getElementById("type").value = "Hacking";
-          document.getElementById("details").value = "";
+          alert("Report submitted successfully!");
+          document.getElementById('reportForm').reset();
         } else {
-          alert("Error sending report. Try again.");
+          alert("Failed to send report.");
         }
-      } catch (error) {
-        alert("Network error. Check your connection.");
-      }
-    }
+      });
+    });
   </script>
 </body>
 </html>
