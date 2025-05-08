@@ -1,150 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop a Report</title>
-    <style>
-        /* Body background image and overlay */
-        body {
-            background-image: url('https://i.postimg.cc/yYWLnGpD/Screenshot-20250508-023924.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drop a Report</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url('https://i.postimg.cc/yYWLnGpD/Screenshot-20250508-023924.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
 
-        /* Dark overlay for blending effect */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Increased darkness */
-            z-index: -1;
-        }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 0;
+    }
 
-        /* Container for form */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* White background for form */
-            border-radius: 8px;
-            color: black;
-        }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      margin-top: 30px;
+    }
 
-        /* Logo styling */
-        .logo img {
-            max-width: 200px;
-            margin-bottom: 20px;
-        }
+    .logo {
+      width: 100px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+    }
 
-        h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
 
-        input, select, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    label {
+      display: block;
+      margin-top: 15px;
+      color: #fff;
+    }
 
-        input, textarea {
-            background-color: white;
-        }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #fff;
+      color: #000;
+    }
 
-        select {
-            background-color: #f9f9f9;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .footer {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
-
-    </style>
+    .footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: white;
+      margin-top: auto;
+    }
+  </style>
 </head>
 <body>
+  <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo" class="logo" />
 
-    <div class="container">
-        <div class="logo">
-            <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo">
-        </div>
-        <h2>Drop a Report</h2>
-        <form id="reportForm">
-            <label for="inGameName">In-Game Name:</label>
-            <input type="text" id="inGameName" name="inGameName" placeholder="Enter the player's in-game name" required>
+  <div class="container">
+    <h2>Drop a Report</h2>
+    <form id="reportForm">
+      <label for="name">In-Game Name</label>
+      <input type="text" id="name" required placeholder="Enter In-Game Name" />
 
-            <label for="whatsappNumber">WhatsApp Number:</label>
-            <input type="text" id="whatsappNumber" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
+      <label for="whatsapp">WhatsApp Number</label>
+      <input type="text" id="whatsapp" required placeholder="Enter WhatsApp Number" />
 
-            <label for="reportType">Select Report Type:</label>
-            <select id="reportType" name="reportType">
-                <option value="Hacking">Hacking</option>
-                <option value="Player FRP">Player FRP</option>
-                <option value="Bug">Bug</option>
-                <option value="Other">Other</option>
-            </select>
+      <label for="reportType">Report Type</label>
+      <select id="reportType" required>
+        <option value="">Select a type</option>
+        <option value="Hacking">Hacking</option>
+        <option value="FRP">Player FRP</option>
+        <option value="Bug">Bug</option>
+      </select>
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" placeholder="Provide detailed description of the issue"></textarea>
+      <label for="description">Description</label>
+      <textarea id="description" rows="4" placeholder="Write full report here..." required></textarea>
 
-            <button type="submit">Submit Report</button>
-        </form>
-    </div>
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
 
-    <div class="footer">
-        <p>&copy; 2025 All Rights Reserved</p>
-    </div>
+  <div class="footer">
+    &copy; 2025 All Rights Reserved
+  </div>
 
-    <script>
-        document.getElementById('reportForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+  <script>
+    const botToken = '8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0';
+    const chatId = '-1002587957935';
 
-            var reportType = document.getElementById('reportType').value;
-            var description = document.getElementById('description').value;
-            var inGameName = document.getElementById('inGameName').value;
-            var whatsappNumber = document.getElementById('whatsappNumber').value;
+    document.getElementById('reportForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const reportType = document.getElementById('reportType').value;
+      const description = document.getElementById('description').value;
 
-            var message = `Report Type: ${reportType}\nDescription: ${description}\nIn-Game Name: ${inGameName}\nWhatsApp: ${whatsappNumber}`;
+      const message = `New Report:\n\nIn-Game Name: ${name}\nWhatsApp: ${whatsapp}\nType: ${reportType}\nDescription: ${description}`;
 
-            var token = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
-            var chatId = "-1002587957935";
-            var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    alert('Report submitted successfully!');
-                    document.getElementById('reportForm').reset();
-                })
-                .catch(error => {
-                    alert('Error submitting the report!');
-                });
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('Report submitted successfully!');
+            document.getElementById('reportForm').reset();
+          } else {
+            alert('Failed to send report.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred.');
         });
-    </script>
-
+    });
+  </script>
 </body>
 </html>
