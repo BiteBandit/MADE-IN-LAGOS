@@ -19,18 +19,55 @@
     .header {
       text-align: center;
       margin-bottom: 50px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7); /* Dark background for contrast */
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     }
     .header h1 {
       font-size: 3rem;
+      color: #f39c12; /* A bright color for the title */
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+    .header p {
+      font-size: 1.5rem;
       color: white;
+      margin-top: 10px;
+      font-weight: 600;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
+
+    .join-header {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      color: #f39c12;
+    }
+
+    .join-header h2 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+    .join-header p {
+      font-size: 1.3rem;
+      color: white;
+      margin-top: 10px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      font-weight: 600;
+    }
+
     .faction-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
       padding: 20px;
     }
+
     .faction-box {
       background: rgba(0, 0, 0, 0.7);
       padding: 25px;
@@ -39,18 +76,22 @@
       text-align: center;
       transition: all 0.3s ease;
     }
+
     .faction-box:hover {
       transform: translateY(-10px);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
     }
+
     .faction-box h3 {
       font-size: 1.5rem;
       margin-bottom: 15px;
     }
+
     .faction-box p {
       font-size: 1.1rem;
       line-height: 1.6;
     }
+
     .faction-btn, .join-btn {
       background-color: #222;
       color: white;
@@ -63,24 +104,30 @@
       margin-top: 20px;
       transition: 0.3s;
     }
+
     .faction-btn:hover, .join-btn:hover {
       background-color: #444;
     }
+
     .pending {
       background-color: #c0392b;
     }
+
     .contact-leader {
       background-color: #27ae60;
     }
+
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>Welcome to the Factions</h1>
-    <p>Choose your path and join one of the factions to start your adventure in Made in Lagos RP!</p>
+  <!-- Join Path Section -->
+  <div class="join-header">
+    <h2>Choose Your Path</h2>
+    <p>Join one of the factions and start your adventure in Made in Lagos RP!</p>
   </div>
 
+  <!-- Factions -->
   <div class="faction-container">
     <!-- Mil Police -->
     <div class="faction-box">
@@ -148,27 +195,4 @@
     <div class="faction-box">
       <h3>Car Dealer</h3>
       <p>Deal cars, provide vehicles to the factions, and make profits.</p>
-      <p class="pending">Status: Pending</p>
-      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Car%20Dealer%20faction'">Join Now</button>
-    </div>
-
-    <!-- Angel's Restaurant -->
-    <div class="faction-box">
-      <h3>Angel's Restaurant</h3>
-      <p>Run a top-tier restaurant, serve delicious meals, and create an amazing dining experience.</p>
-      <p class="pending">Status: Pending</p>
-      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Angel%27s%20Restaurant%20faction'">Join Now</button>
-    </div>
-
-    <!-- Taxi Services -->
-    <div class="faction-box">
-      <h3>Taxi Services</h3>
-      <p>Provide transportation and be the lifeline for the citizens of Lagos.</p>
-      <p class="pending">Status: Pending</p>
-      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Taxi%20Services%20faction'">Join Now</button>
-    </div>
-
-  </div>
-
-</body>
-</html>
+      <p class="pending">Status: Pending</
