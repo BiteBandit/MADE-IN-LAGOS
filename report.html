@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Report Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #0066ff;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #004db3;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Submit a Report</h2>
+    <label for="ign">In-Game Name</label>
+    <input type="text" id="ign" placeholder="Your In-Game Name" />
+
+    <label for="whatsapp">WhatsApp Number</label>
+    <input type="text" id="whatsapp" placeholder="Your WhatsApp Number" />
+
+    <label for="type">Report Type</label>
+    <select id="type">
+      <option value="Hacking">Hacking</option>
+      <option value="Player FRP">Player FRP</option>
+      <option value="Bug">Bug</option>
+    </select>
+
+    <label for="details">Report Details</label>
+    <textarea id="details" placeholder="Enter report details..." rows="5"></textarea>
+
+    <button onclick="sendReport()">Submit Report</button>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 All Rights Reserved
+  </div>
+
+  <script>
+    async function sendReport() {
+      const ign = document.getElementById("ign").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+      const type = document.getElementById("type").value;
+      const details = document.getElementById("details").value.trim();
+
+      if (!ign || !whatsapp || !details) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      const message = `New Report Received:\n\nIGN: ${ign}\nWhatsApp: ${whatsapp}\nType: ${type}\nDetails: ${details}`;
+      const botToken = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
+      const chatId = "-1002587957935";
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      const data = {
+        chat_id: chatId,
+        text: message
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert("Report sent successfully!");
+          document.getElementById("ign").value = "";
+          document.getElementById("whatsapp").value = "";
+          document.getElementById("type").value = "Hacking";
+          document.getElementById("details").value = "";
+        } else {
+          alert("Error sending report. Try again.");
+        }
+      } catch (error) {
+        alert("Network error. Check your connection.");
+      }
+    }
+  </script>
+</body>
+</html>
