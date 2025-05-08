@@ -16,7 +16,7 @@
       background-position: center;
       color: #fff;
       position: relative;
-      overflow: hidden;
+      overflow: auto;
     }
 
     /* Overlay to make text more readable on the background */
@@ -31,19 +31,6 @@
       z-index: -1;
     }
 
-    /* Glow Effect for Gold */
-    @keyframes gold-shine {
-      0% {
-        text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5);
-      }
-      50% {
-        text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.4);
-      }
-      100% {
-        text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5);
-      }
-    }
-
     /* Container Styling */
     .container {
       max-width: 1200px;
@@ -54,8 +41,7 @@
     h1 {
       font-size: 4rem;
       margin-bottom: 60px;
-      color: #ffd700;
-      animation: gold-shine 1.5s ease-in-out infinite;
+      color: #fff;
     }
 
     /* Plan Cards Grid */
@@ -69,7 +55,7 @@
     /* Individual Plan Cards */
     .plan-card {
       background: rgba(0, 0, 0, 0.8);
-      border: 2px solid #ffd700;
+      border: 2px solid #fff;
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
@@ -83,33 +69,19 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
-    /* Gold Animation on Plan Cards */
-    .plan-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 215, 0, 0.4);
-      animation: gold-shine 3s linear infinite;
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
     .plan-title {
       font-size: 2.5rem;
       margin-bottom: 15px;
       font-weight: bold;
-      color: #ffd700;
-      border-bottom: 3px solid #ffd700;
+      color: #fff;
+      border-bottom: 3px solid #fff;
       padding-bottom: 10px;
     }
 
     .plan-price {
       font-size: 2.5rem;
       font-weight: bold;
-      color: #ffd700;
+      color: #fff;
       margin-bottom: 20px;
     }
 
@@ -131,7 +103,7 @@
       content: "•";
       position: absolute;
       left: 0;
-      color: #ffd700;
+      color: #fff;
     }
 
     /* Join Button Styling */
@@ -147,7 +119,7 @@
     }
 
     .join-btn:hover {
-      background: linear-gradient(135deg, #ffd700, #ff9900);
+      background: linear-gradient(135deg, #fff, #ddd);
       color: #000;
     }
 
@@ -160,7 +132,7 @@
     }
 
     footer a {
-      color: #ffd700;
+      color: #fff;
       text-decoration: none;
     }
   </style>
@@ -251,8 +223,7 @@
         </ul>
         <a href="https://wa.me/+2349162960641?text=I%20want%20to%20join%20Level%206%20VIP%20Plan" class="join-btn" target="_blank">Join VIP</a>
       </div>
-
-      <!-- Level 7 Plan -->
+<!-- Level 7 Plan -->
       <div class="plan-card">
         <div class="plan-title">LEVEL 7 - 7000₦</div>
         <div class="plan-price">💸 7000₦</div>
@@ -266,11 +237,10 @@
         </ul>
         <a href="https://wa.me/+2349162960641?text=I%20want%20to%20join%20Level%207%20VIP%20Plan" class="join-btn" target="_blank">Join VIP</a>
       </div>
-    </div>
+  </div>
 
-<footer>
-    <p>&copy; 2025 Made in Lagos RP. All Rights Reserved. | <a href="https://wa.me/+2349162960641">Contact Us</a></p>
+  <footer>
+    <p>&copy; 2025 VIP Plans. All Rights Reserved.</p>
   </footer>
 </body>
 </html>
-
