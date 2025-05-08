@@ -17,7 +17,7 @@
     }
 
     .overlay {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       min-height: 100vh;
       padding: 40px 20px;
     }
@@ -25,14 +25,23 @@
     .container {
       max-width: 900px;
       margin: auto;
-      background: rgba(0, 0, 0, 0.6);
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
-      animation: fadeUp 1.5s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
     }
+
+    h1, h2, p {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    h1 { animation-delay: 0.3s; }
+    h2:nth-of-type(1) { animation-delay: 0.8s; }
+    p:nth-of-type(1) { animation-delay: 1.2s; }
+    h2:nth-of-type(2) { animation-delay: 1.7s; }
+    p:nth-of-type(2) { animation-delay: 2.1s; }
+    h2:nth-of-type(3) { animation-delay: 2.6s; }
+    p:nth-of-type(3) { animation-delay: 3.0s; }
 
     @keyframes fadeUp {
       to {
@@ -42,7 +51,7 @@
     }
 
     h1, h2 {
-      color: #ffffff;
+      color: #fff;
       text-align: center;
     }
 
@@ -50,6 +59,7 @@
       line-height: 1.7;
       font-size: 17px;
       margin: 20px 0;
+      text-align: justify;
     }
 
     footer {
@@ -57,6 +67,10 @@
       margin-top: 40px;
       font-size: 14px;
       color: #bbb;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 3.5s;
     }
   </style>
 </head>
@@ -65,6 +79,7 @@
     <div class="container">
       <h1>About Our Server</h1>
 
+      <h2>The Journey</h2>
       <p>
         Our server has faced countless challenges since its creation, including multiple hacking attacks and betrayal attempts. Despite these, we’ve stood strong and continued growing stronger each day.
       </p>
