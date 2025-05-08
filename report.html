@@ -1,120 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Report Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drop a Report</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      color: white;
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png');
+      background-image: url('https://i.postimg.cc/yYWLnGpD/Screenshot-20250508-023924.png');
       background-size: cover;
+      background-repeat: no-repeat;
       background-position: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    }.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
-    .logo {
-      width: 80px;
-      height: auto;
-      margin: 20px;
-      border-radius: 10px;
-    }
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
 
-    .container {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      text-align: center;
-    }
+h1 {
+  color: white;
+  margin-bottom: 20px;
+}
 
-    input, select, button {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-    }
+form {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
 
-    button {
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-    button:hover {
-      background-color: #0056b3;
-    }
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
-    footer {
-      margin-top: 30px;
-      padding: 10px;
-      text-align: center;
-      color: #ccc;
-    }
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  color: white;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
   </style>
 </head>
 <body>
-
-  <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo" class="logo">
-
-  <div class="container">
-    <h2>Report a Player</h2>
+  <div class="overlay">
+    <img class="logo" src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo">
+    <h1>Drop a Report</h1>
     <form id="reportForm">
-      <input type="text" id="ign" placeholder="In-Game Name" required>
-      <input type="text" id="whatsapp" placeholder="WhatsApp Number" required>
-      <select id="reportType" required>
-        <option value="">Select Report Type</option>
-        <option value="Hacking">Hacking</option>
-        <option value="Player FRP">Player FRP</option>
-        <option value="Bug">Bug</option>
-      </select>
-      <button type="submit">Submit Report</button>
-    </form>
-  </div>
+      <label for="ingameName">In-Game Name:</label>
+      <input type="text" id="ingameName" name="ingameName" required /><label for="whatsappNumber">WhatsApp Number:</label>
+  <input type="text" id="whatsappNumber" name="whatsappNumber" required />
 
-  <footer>
-    &copy; 2025 All Rights Reserved
-  </footer>
+  <label for="reportType">Report Type:</label>
+  <select id="reportType" name="reportType" required>
+    <option value="cheating">Cheating</option>
+    <option value="hacking">Hacking</option>
+    <option value="player_frp">Player FRP</option>
+    <option value="bug">Bug</option>
+  </select>
 
-  <script>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" rows="4" required></textarea>
+
+  <button type="submit">Submit Report</button>
+</form>
+<div class="footer">&copy; 2025 All rights reserved</div>
+
+  </div>  <script>
     const token = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
     const groupId = "-1002587957935";
 
-    document.getElementById('reportForm').addEventListener('submit', function(e) {
+    document.getElementById("reportForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      const ingameName = document.getElementById("ingameName").value;
+      const whatsappNumber = document.getElementById("whatsappNumber").value;
+      const reportType = document.getElementById("reportType").value;
+      const description = document.getElementById("description").value;
 
-      const ign = document.getElementById('ign').value;
-      const whatsapp = document.getElementById('whatsapp').value;
-      const reportType = document.getElementById('reportType').value;
-
-      const message = `New Report:\n\nIGN: ${ign}\nWhatsApp: ${whatsapp}\nReport Type: ${reportType}`;
+      const message = `*New Report Submitted*\n\n*In-Game Name:* ${ingameName}\n*WhatsApp Number:* ${whatsappNumber}\n*Report Type:* ${reportType}\n*Description:* ${description}`;
 
       fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           chat_id: groupId,
-          text: message
-        })
-      }).then(response => {
-        if (response.ok) {
+          text: message,
+          parse_mode: "Markdown",
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
           alert("Report submitted successfully!");
-          document.getElementById('reportForm').reset();
-        } else {
-          alert("Failed to send report.");
-        }
-      });
+          document.getElementById("reportForm").reset();
+        })
+        .catch((error) => {
+          alert("Error sending report. Please try again.");
+        });
     });
-  </script>
-</body>
+  </script></body>
 </html>
