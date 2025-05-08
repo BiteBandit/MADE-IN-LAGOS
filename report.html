@@ -7,160 +7,137 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
+      background: black;
       font-family: Arial, sans-serif;
-      background: #000;
       color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      background-image: url('https://i.postimg.cc/yYWLnGpD/Screenshot-20250508-023924.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 0;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      max-width: 400px;
-      width: 100%;
+      max-width: 500px;
+      margin: 40px auto;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
-      margin-top: 30px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
     }
 
     .logo {
-      width: 100px;
+      width: 120px;
       margin: 20px auto;
       display: block;
       border-radius: 10px;
+      background: white;
+      padding: 8px;
     }
 
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #fff;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      color: #fff;
     }
 
     input, select, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 5px;
-      background: #fff;
-      color: #000;
-    }
-
-    button {
-      width: 100%;
       padding: 12px;
-      margin-top: 20px;
-      background-color: #fff;
-      color: #000;
+      margin-bottom: 15px;
       border: none;
       border-radius: 5px;
       font-size: 16px;
+    }
+
+    input, textarea {
+      background: white;
+      color: black;
+    }
+
+    select {
+      background: #eee;
+      color: black;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 5px;
       cursor: pointer;
     }
 
     .footer {
       text-align: center;
-      padding: 15px;
+      margin-top: 30px;
       font-size: 14px;
-      color: white;
-      margin-top: auto;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" alt="Logo" class="logo" />
 
   <div class="container">
+    <img src="https://i.postimg.cc/SR3L5rz6/Screenshot-20250507-170001.png" class="logo" alt="Logo">
     <h2>Drop a Report</h2>
-    <form id="reportForm">
-      <label for="name">In-Game Name</label>
-      <input type="text" id="name" required placeholder="Enter In-Game Name" />
 
-      <label for="whatsapp">WhatsApp Number</label>
-      <input type="text" id="whatsapp" required placeholder="Enter WhatsApp Number" />
+    <input type="text" id="name" placeholder="Enter In-Game Name" required>
+    <input type="text" id="number" placeholder="Enter WhatsApp Number" required>
 
-      <label for="reportType">Report Type</label>
-      <select id="reportType" required>
-        <option value="">Select a type</option>
-        <option value="Hacking">Hacking</option>
-        <option value="FRP">Player FRP</option>
-        <option value="Bug">Bug</option>
-      </select>
+    <select id="type" required>
+      <option value="" disabled selected>Select Report Type</option>
+      <option value="Hacking">Hacking</option>
+      <option value="FRP">FRP</option>
+      <option value="Bug">Bug</option>
+      <option value="Other">Other</option>
+    </select>
 
-      <label for="description">Description</label>
-      <textarea id="description" rows="4" placeholder="Write full report here..." required></textarea>
+    <textarea id="description" rows="4" placeholder="Describe the issue" required></textarea>
 
-      <button type="submit">Submit Report</button>
-    </form>
+    <button onclick="submitReport()">Submit</button>
   </div>
 
-  <div class="footer">
-    &copy; 2025 All Rights Reserved
-  </div>
+  <div class="footer">© 2025 All Rights Reserved</div>
 
   <script>
-    const botToken = '8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0';
-    const chatId = '-1002587957935';
-
-    document.getElementById('reportForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+    function submitReport() {
       const name = document.getElementById('name').value;
-      const whatsapp = document.getElementById('whatsapp').value;
-      const reportType = document.getElementById('reportType').value;
+      const number = document.getElementById('number').value;
+      const type = document.getElementById('type').value;
       const description = document.getElementById('description').value;
 
-      const message = `New Report:\n\nIn-Game Name: ${name}\nWhatsApp: ${whatsapp}\nType: ${reportType}\nDescription: ${description}`;
+      if (!name || !number || !type || !description) {
+        alert("Please fill in all fields");
+        return;
+      }
 
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+      const message = `🛑 New Report 🛑\n\n*In-Game Name:* ${name}\n*WhatsApp:* ${number}\n*Report Type:* ${type}\n*Description:* ${description}`;
+      const botToken = "8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0";
+      const groupId = "-1002587957935";
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: message
+          chat_id: groupId,
+          text: message,
+          parse_mode: "Markdown"
         })
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            alert('Report submitted successfully!');
-            document.getElementById('reportForm').reset();
-          } else {
-            alert('Failed to send report.');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred.');
-        });
-    });
+      .then(res => res.json())
+      .then(data => {
+        alert("Report submitted successfully!");
+        document.getElementById("name").value = "";
+        document.getElementById("number").value = "";
+        document.getElementById("type").value = "";
+        document.getElementById("description").value = "";
+      })
+      .catch(error => {
+        alert("Failed to submit report.");
+        console.error(error);
+      });
+    }
   </script>
+
 </body>
 </html>
