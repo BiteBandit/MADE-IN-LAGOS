@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Factions - Made in Lagos RP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      background: url('https://i.postimg.cc/yYWLnGpD/Screenshot-20250508-023924.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 60px; /* For sticky navbar */
+      filter: brightness(0.85); /* Darken the background slightly */
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .header h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+    .faction-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+    .faction-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .faction-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+    .faction-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    .faction-box p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    .faction-btn, .join-btn {
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 12px;
+      text-transform: uppercase;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    .faction-btn:hover, .join-btn:hover {
+      background-color: #444;
+    }
+    .pending {
+      background-color: #c0392b;
+    }
+    .contact-leader {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Welcome to the Factions</h1>
+    <p>Choose your path and join one of the factions to start your adventure in Made in Lagos RP!</p>
+  </div>
+
+  <div class="faction-container">
+    <!-- Mil Police -->
+    <div class="faction-box">
+      <h3>Mil Police</h3>
+      <p>Fight crime, uphold the law, and maintain order in the streets of Lagos. Protect the people!</p>
+      <button class="faction-btn contact-leader" onclick="window.location.href='https://wa.me/2347048815066?text=Hello%20I%20want%20to%20join%20Mil%20Police%20faction'">Contact Leader</button>
+    </div>
+
+    <!-- Mil Medic -->
+    <div class="faction-box">
+      <h3>Mil Medic</h3>
+      <p>Specialized in medical support, Mil Medics provide life-saving services during conflicts.</p>
+      <button class="faction-btn contact-leader" onclick="window.location.href='https://wa.me/2348167782126?text=Hello%20I%20want%20to%20join%20Mil%20Medic%20faction'">Contact Leader</button>
+    </div>
+
+    <!-- Mil EFCC -->
+    <div class="faction-box">
+      <h3>Mil EFCC</h3>
+      <p>Join the EFCC to fight corruption and protect the nation's wealth from financial crimes.</p>
+      <button class="faction-btn contact-leader" onclick="window.location.href='https://wa.me/2348169668409?text=Hello%20I%20want%20to%20join%20Mil%20EFCC%20faction'">Contact Leader</button>
+    </div>
+
+    <!-- Pending Factions -->
+
+    <!-- BBC -->
+    <div class="faction-box">
+      <h3>BBC</h3>
+      <p>Be the voice of the people! Join BBC to become a part of our news-casting team to inform the world!</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20BBC%20faction'">Join Now</button>
+    </div>
+
+    <!-- Gangs -->
+    <div class="faction-box">
+      <h3>Gangs</h3>
+      <p>Take part in illegal activities and dominate the criminal world of Lagos.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Gangs%20faction'">Join Now</button>
+    </div>
+
+    <!-- Mil Mechanic -->
+    <div class="faction-box">
+      <h3>Mil Mechanic</h3>
+      <p>Specialize in vehicle repairs and maintaining military-grade machinery.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Mil%20Mechanic%20faction'">Join Now</button>
+    </div>
+
+    <!-- Government -->
+    <div class="faction-box">
+      <h3>Government</h3>
+      <p>Join the government faction and rule over Lagos with the authority and power of the state.</p>
+      <button class="faction-btn contact-leader" onclick="window.location.href='https://wa.me/2349015006454?text=Hello%20I%20want%20to%20join%20Government%20faction'">Contact Leader</button>
+    </div>
+
+    <!-- CIA -->
+    <div class="faction-box">
+      <h3>CIA</h3>
+      <p>Join the CIA for international operations and top-secret missions.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20CIA%20faction'">Join Now</button>
+    </div>
+
+    <!-- Car Dealer -->
+    <div class="faction-box">
+      <h3>Car Dealer</h3>
+      <p>Deal cars, provide vehicles to the factions, and make profits.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Car%20Dealer%20faction'">Join Now</button>
+    </div>
+
+    <!-- Angel's Restaurant -->
+    <div class="faction-box">
+      <h3>Angel's Restaurant</h3>
+      <p>Run a top-tier restaurant, serve delicious meals, and create an amazing dining experience.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Angel%27s%20Restaurant%20faction'">Join Now</button>
+    </div>
+
+    <!-- Taxi Services -->
+    <div class="faction-box">
+      <h3>Taxi Services</h3>
+      <p>Provide transportation and be the lifeline for the citizens of Lagos.</p>
+      <p class="pending">Status: Pending</p>
+      <button class="faction-btn join-btn" onclick="window.location.href='https://wa.me/2348122454936?text=Hello%20I%20want%20to%20join%20Taxi%20Services%20faction'">Join Now</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
