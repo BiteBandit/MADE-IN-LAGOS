@@ -24,7 +24,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            background: rgba(0, 0, 0, 0.6); /* Darker overlay */
             z-index: -1;
         }
 
@@ -34,9 +34,9 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.8); /* Dark background for form */
+            background-color: rgba(255, 255, 255, 0.9); /* White background for form */
             border-radius: 8px;
-            color: white;
+            color: black;
         }
 
         /* Logo styling */
@@ -50,12 +50,20 @@
             margin-bottom: 20px;
         }
 
-        select, textarea, button {
+        input, select, textarea, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
+        }
+
+        input, textarea {
+            background-color: white;
+        }
+
+        select {
+            background-color: #f9f9f9;
         }
 
         button {
@@ -86,6 +94,12 @@
         </div>
         <h2>Drop a Report</h2>
         <form id="reportForm">
+            <label for="inGameName">In-Game Name:</label>
+            <input type="text" id="inGameName" name="inGameName" placeholder="Enter the player's in-game name" required>
+
+            <label for="whatsappNumber">WhatsApp Number:</label>
+            <input type="text" id="whatsappNumber" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
+
             <label for="reportType">Select Report Type:</label>
             <select id="reportType" name="reportType">
                 <option value="Hacking">Hacking</option>
@@ -96,12 +110,6 @@
 
             <label for="description">Description:</label>
             <textarea id="description" name="description" rows="4" placeholder="Provide detailed description of the issue"></textarea>
-
-            <label for="inGameName">In-Game Name:</label>
-            <input type="text" id="inGameName" name="inGameName" placeholder="Enter the player's in-game name" required>
-
-            <label for="whatsappNumber">WhatsApp Number:</label>
-            <input type="text" id="whatsappNumber" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
 
             <button type="submit">Submit Report</button>
         </form>
