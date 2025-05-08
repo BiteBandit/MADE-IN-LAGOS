@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.postimg.cc/13v16Y5j/Screenshot-20250508-090353.png');
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); 
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #f1f1f1;
+        }
+        .success-message, .error-message {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .success-message {
+            color: #28a745;
+        }
+        .error-message {
+            color: #dc3545;
+        }
+        .clear-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>If you have any suggestions or ideas for our server or website, please share them below:</p>
+        <form id="suggestion-form">
+            <input type="text" id="name" placeholder="Enter your name" required><br>
+            <input type="text" id="suggestion" placeholder="Enter your suggestion or idea" required><br>
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+        <div class="loading" id="loading">Sending...</div>
+        <div class="success-message" id="success-message">Thank you for your suggestion! We appreciate your input.</div>
+        <div class="error-message" id="error-message">Something went wrong. Please try again later.</div>
+        <button class="clear-btn" type="button" id="clear-btn">Clear</button>
+    </div>
+
+    <script>
+        const form = document.getElementById('suggestion-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const clearBtn = document.getElementById('clear-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true; // Disable submit button
+            loading.style.display = 'block'; // Show loading message
+
+            const name = document.getElementById('name').value;
+            const suggestion = document.getElementById('suggestion').value;
+
+            const message = `Name: ${name}\nSuggestion: ${suggestion}`;
+
+            // Replace with your Telegram bot token and group ID
+            const token = '8151429137:AAEZb095wNIkxujeKqXIzXWHycNaIOB15_0';
+            const chatId = '-1002587957935'; 
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => {
+                    if (response.ok) {
+                        successMessage.style.display = 'block'; // Show success message
+                    } else {
+                        errorMessage.style.display = 'block'; // Show error message
+                    }
+                })
+                .catch(() => {
+                    errorMessage.style.display = 'block'; // Show error message if fetch fails
+                })
+                .finally(() => {
+                    loading.style.display = 'none'; // Hide loading message
+                    submitBtn.disabled = false; // Enable submit button
+                });
+        });
+
+        // Clear form functionality
+        clearBtn.addEventListener('click', () => {
+            document.getElementById('name').value = '';
+            document.getElementById('suggestion').value = '';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
