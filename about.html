@@ -29,25 +29,15 @@
       border-radius: 10px;
     }
 
-    h1, h2, p {
+    h1, h2, p, footer {
       opacity: 0;
       transform: translateY(30px);
-      animation: fadeUp 1s ease forwards;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    h1 { animation-delay: 0.3s; }
-    h2:nth-of-type(1) { animation-delay: 0.8s; }
-    p:nth-of-type(1) { animation-delay: 1.2s; }
-    h2:nth-of-type(2) { animation-delay: 1.7s; }
-    p:nth-of-type(2) { animation-delay: 2.1s; }
-    h2:nth-of-type(3) { animation-delay: 2.6s; }
-    p:nth-of-type(3) { animation-delay: 3.0s; }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h1, h2 {
@@ -67,40 +57,50 @@
       margin-top: 40px;
       font-size: 14px;
       color: #bbb;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards;
-      animation-delay: 3.5s;
     }
   </style>
 </head>
 <body>
   <div class="overlay">
     <div class="container">
-      <h1>About Our Server</h1>
+      <h1 class="fade">About Our Server</h1>
 
-      <h2>The Journey</h2>
-      <p>
+      <h2 class="fade">The Journey</h2>
+      <p class="fade">
         Our server has faced countless challenges since its creation, including multiple hacking attacks and betrayal attempts. Despite these, we’ve stood strong and continued growing stronger each day.
       </p>
 
-      <h2>The Mysterious Fall of Fortunate</h2>
-      <p>
+      <h2 class="fade">The Mysterious Fall of Fortunate</h2>
+      <p class="fade">
         Fortunate, our former president, once held great power. But during the intense process of dethroning him, he shockingly attempted to steal server funds. His betrayal shocked the community, but it also united us to take swift action and protect our legacy.
       </p>
 
-      <h2>The Rise of Big Loner</h2>
-      <p>
+      <h2 class="fade">The Rise of Big Loner</h2>
+      <p class="fade">
         After Fortunate's removal, Big Loner rose to leadership. Calm, strategic, and focused on the players’ best interests, Big Loner has led the server into a new era of order and fairness. Under his leadership, our community thrives.
       </p>
 
-      <h2>About the Server Owner - Nicky Demons</h2>
-      <p>
+      <h2 class="fade">About the Server Owner - Nicky Demons</h2>
+      <p class="fade">
         The heart and soul of the server, <strong>Nicky Demons</strong>, is a visionary with an unshakable commitment to fairness, creativity, and security. Nicky's leadership has kept the server alive through countless trials. Without him, none of this would be possible.
       </p>
 
-      <footer>© 2025 All Rights Reserved</footer>
+      <footer class="fade">© 2025 All Rights Reserved</footer>
     </div>
   </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
