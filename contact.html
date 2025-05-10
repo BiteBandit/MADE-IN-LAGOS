@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-<!-- Google tag (gtag.js) -->
+<!-- G                oogle tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XSE3S267R"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -134,7 +134,7 @@
                         errorMessage.style.display = 'block'; // Show error message
                     }
                 })
-                .catch(() => {
+.catch(() => {
                     errorMessage.style.display = 'block'; // Show error message if fetch fails
                 })
                 .finally(() => {
@@ -151,5 +151,14 @@
             errorMessage.style.display = 'none';
         });
     </script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "c0f70a7f-f1fc-4c20-b16e-74ed118905ce",
+    });
+  });
+</script>
 </body>
 </html>
